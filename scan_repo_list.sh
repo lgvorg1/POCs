@@ -77,12 +77,15 @@ env | grep _TOKEN
 
 read -r -a splitArray <<<"$parameterZ"
 
+counter=0
+
 for a in "${splitArray[@]}"; do
     echo "$a"
+    ((counter++))
     git clone "$a" dir1
     pwd
     ls -al
-    ls -al dir1
+    ls -al dir$counter
     exit 1
 done
 

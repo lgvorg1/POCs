@@ -114,10 +114,7 @@ jobs:
           #        "frog")
           declare -a arr=(
                           "https://github.com/lgvorg1/secrets_local.git"
-                          "element1" 
-                          "element2" 
-                          "element3"
-                          "element4"
+                          "https://github.com/lgvorg1/cicd_top10_1.git"
                           )
           #for i in "${arr[@]}"
           #do
