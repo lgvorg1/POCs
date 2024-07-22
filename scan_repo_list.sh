@@ -36,6 +36,13 @@ downloadXYscanner()
 
 }
 
+executeXYscanner()
+{
+    echo $1
+    #./scanner/xygeni scan  --include-collaborators --run="inventory,misconf,codetamper,deps,suspectdeps,secrets,compliance,iac" -n $1 --dir $1 -e **/scanner_pro/**
+    ./scanner/xygeni scan  --include-collaborators --run="inventory,misconf,codetamper,deps,suspectdeps,secrets,compliance,iac" -n $1 -repo=$1 -e **/scanner_pro/**
+}
+
 while getopts "d:x:c:p:z:" opt
 do
    case "$opt" in
@@ -86,19 +93,23 @@ env | grep _TOKEN
 
 read -r -a splitArray <<<"$parameterZ"
 
-counter=0
-
-for a in "${splitArray[@]}"; do
-    echo "$a"
-    ((counter++))
-    git clone "$a" dir$counter
-    pwd
-    ls -al
-    ls -al dir$counter
-done
 
 
 downloadXYscanner "$parameterX"
+
+counter=0
+for a in "${splitArray[@]}"; do
+    echo "$a"
+    executeXYscanner "$a"
+    ((counter++))
+    #git clone "$a" dir$counter
+    #pwd
+    #ls -al
+    #ls -al dir$counter
+done
+
+
+
 
 
 
