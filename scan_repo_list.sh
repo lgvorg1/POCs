@@ -18,33 +18,37 @@
 helpFunction()
 {
    echo ""
-   echo "Usage: $0 -a parameterA -b parameterB -c parameterC"
-   echo -e "\t-a Description of what is parameterA"
-   echo -e "\t-b Description of what is parameterB"
-   echo -e "\t-c Description of what is parameterC"
+   echo "Usage: $0 -x xygeni_token -c cicd -c parameterC"
+   echo -e "\t-x xygeni_token"
+   echo -e "\t-c cicd system"
+   echo -e "\t-z Description of what is parameterC"
    exit 1 # Exit script after printing help
 }
 
 while getopts "a:b:c:" opt
 do
    case "$opt" in
-      a ) parameterA="${OPTARG}" ;;
-      b ) parameterB="${OPTARG}" ;;
+      x ) parameterX="${OPTARG}" ;;
       c ) parameterC="${OPTARG}" ;;
+      z ) parameterZ="${OPTARG}" ;;
       ? ) helpFunction ;; # Print helpFunction in case parameter is non-existent
    esac
 done
 
 # Print helpFunction in case parameters are empty
-if [ -z "$parameterA" ] || [ -z "$parameterB" ] || [ -z "$parameterC" ]
+if [ -z "$parameterX" ] || [ -z "$parameterC" ] || [ -z "$parameterZ" ]
 then
    echo "Some or all of the parameters are empty";
    helpFunction
 fi
 
 # Begin script in case all parameters are correct
-echo "$parameterA"
-echo "$parameterB"
+echo xygeni_token: "$parameterX"
+echo cicd system: "$parameterC"
+case "cicd" in $parameterC
+    "jenkins" ) echo "PArameter is Jenkins" ;;
+    * ) echo "chungo" ;;
+esac
 
 read -r -a splitArray <<<"$parameterC"
 
