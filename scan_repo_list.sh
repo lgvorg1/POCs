@@ -28,9 +28,9 @@ helpFunction()
 while getopts "a:b:c:" opt
 do
    case "$opt" in
-      a ) parameterA="$OPTARG" ;;
-      b ) parameterB="$OPTARG" ;;
-      c ) parameterC="$OPTARG" ;;
+      a ) parameterA="${OPTARG}" ;;
+      b ) parameterB="{$OPTARG}" ;;
+      c ) parameterC="{$OPTARG}" ;;
       ? ) helpFunction ;; # Print helpFunction in case parameter is non-existent
    esac
 done
@@ -45,7 +45,15 @@ fi
 # Begin script in case all parameters are correct
 echo "$parameterA"
 echo "$parameterB"
-#echo "$parameterC"
-for a in "${parameterC[@]}"; do
+
+read -r -a splitArray <<<"$ARRAY"
+
+for a in "${splitArray[@]}"; do
     echo "$a"
 done
+
+
+#echo "$parameterC"
+#for a in "${parameterC[@]}"; do
+#    echo "$a"
+#done
