@@ -46,7 +46,7 @@ fi
 echo "$parameterA"
 echo "$parameterB"
 
-read -r -a splitArray <<<"$ARRAY"
+read -r -a splitArray <<<"$parameterC"
 
 for a in "${splitArray[@]}"; do
     echo "$a"
