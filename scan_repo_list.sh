@@ -66,7 +66,8 @@ case "$parameterC" in
     "circle_ci" ) export CIRCLECI_TOKEN="$parameterP" 
                 echo "Parameter is Circle CI" 
                 echo $CIRCLECI_TOKEN ;;
-    * ) echo -e "\t-c cicd system [$parameterC] not valid. valid values [jenkins|gitlab|bitbucket|azure_devops|github|circle_ci]" ;;
+    * ) echo -e "\t-c cicd system [$parameterC] not valid. valid values [jenkins|gitlab|bitbucket|azure_devops|github|circle_ci]"
+        exit 1 ;;
 esac
 
 read -r -a splitArray <<<"$parameterZ"
