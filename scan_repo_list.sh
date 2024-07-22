@@ -51,7 +51,22 @@ case "$parameterC" in
     "jenkins" ) export JENKINS_TOKEN="$parameterP" 
                 echo "Parameter is Jenkins" 
                 echo $JENKINS_TOKEN ;;
-    * ) echo "chungo" ;;
+    "gitlab" ) export GITLAB_TOKEN="$parameterP" 
+                echo "Parameter is GitLab" 
+                echo $GITLAB_TOKEN ;;
+    "bitbucket" ) export BITBUCKET_TOKEN="$parameterP" 
+                echo "Parameter is BitBucket" 
+                echo $BITBUCKET_TOKEN ;;
+    "azure_devops" ) export AZURE_TOKEN="$parameterP" 
+                echo "Parameter is BitBucket" 
+                echo $AZURE_TOKEN ;;
+    "github" ) export GITHUB_TOKEN="$parameterP" 
+                echo "Parameter is BitBucket" 
+                echo $GITHUB_TOKEN ;;
+    "circle_ci" ) export CIRCLECI_TOKEN="$parameterP" 
+                echo "Parameter is Circle CI" 
+                echo $CIRCLECI_TOKEN ;;
+    * ) echo -e "\t-c cicd system not valid. valid values [jenkins|gitlab|bitbucket|azure_devops|github@circle_ci]" ;;
 esac
 
 read -r -a splitArray <<<"$parameterZ"
