@@ -12,20 +12,11 @@ on:
 
   # Allows you to run this workflow manually from the Actions tab sd 
   workflow_dispatch:
-    inputs:
-      xy-env:
-          type: choice
-          description: Xygeni Env
-          options: 
-          - PRO
-          - DEMO
-          - PARTNERS
-          default: PRO
+
  
 env:
   
-  XY_ENV: ${{ github.event_name == 'push' && 'PRO' || github.event.inputs.xy-env }}
-  XY_PRJ_NAME: GitHub-${{ github.event.repository.name }}
+  XY_TOKEN: ${{ secrets.XY_TOKEN_PRO }}
 
 
 jobs:
@@ -39,39 +30,6 @@ jobs:
     # ref: ${{ github.event.pull_request.head.sha }}
   
     steps:
-
-      - name: Set Xygeni env 
-        run: |
-
-          case "$XY_ENV" in 
-            PRO)
-              echo "PRO"
-              echo XY_USERNAME=${{ secrets.XY_USERNAME_PRO }} >> $GITHUB_ENV
-              echo XY_PASSWORD=${{ secrets.XY_PASSWORD_PRO }} >> $GITHUB_ENV
-              echo XY_TOKEN=${{ secrets.XY_TOKEN_PRO }} >> $GITHUB_ENV
-              echo XY_URL=${{ secrets.XY_URL_PRO }} >> $GITHUB_ENV
-              ;;
-            DEMO)
-              echo "DEMO"
-              echo XY_USERNAME=${{ secrets.XY_USERNAME_DEMO }} >> $GITHUB_ENV
-              echo XY_PASSWORD=${{ secrets.XY_PASSWORD_DEMO }} >> $GITHUB_ENV
-              echo XY_URL=${{ secrets.XY_URL_DEMO }} >> $GITHUB_ENV
-              ;;
-            PARTNERS)
-              echo "PARTNERS"
-              echo XY_USERNAME=${{ secrets.XY_USERNAME_PARTNERS }} >> $GITHUB_ENV
-              echo XY_PASSWORD=${{ secrets.XY_PASSWORD_PARTNERS }} >> $GITHUB_ENV
-              echo XY_URL=${{ secrets.XY_URL_PARTNERS }} >> $GITHUB_ENV
-              ;;
-            *)
-              echo "DEFAULT (PRO)"
-              echo XY_USERNAME=${{ secrets.XY_USERNAME_PRO }} >> $GITHUB_ENV
-              echo XY_PASSWORD=${{ secrets.XY_PASSWORD_PRO }} >> $GITHUB_ENV
-              echo XY_URL=${{ secrets.XY_URL_PRO }} >> $GITHUB_ENV
-              ;;
-          esac
-
-
 
       # Runs a set of commands using the runners shell   
       - name: Scan repo list 
