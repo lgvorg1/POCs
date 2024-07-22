@@ -18,9 +18,10 @@
 helpFunction()
 {
    echo ""
-   echo "Usage: $0 -x xygeni_token -c cicd -z parameterC"
+   echo "Usage: $0 -x xygeni_token -c cicd -p cicd_token -z parameterC"
    echo -e "\t-x xygeni_token"
    echo -e "\t-c cicd system"
+   echo -e "\t-p cicd token"
    echo -e "\t-z Description of what is parameterC"
    exit 1 # Exit script after printing help
 }
@@ -30,13 +31,14 @@ do
    case "$opt" in
       x ) parameterX="${OPTARG}" ;;
       c ) parameterC="${OPTARG}" ;;
+      p ) parameterP="${OPTARG}" ;;
       z ) parameterZ="${OPTARG}" ;;
       ? ) helpFunction ;; # Print helpFunction in case parameter is non-existent
    esac
 done
 
 # Print helpFunction in case parameters are empty
-if [ -z "$parameterX" ] || [ -z "$parameterC" ] || [ -z "$parameterZ" ]
+if [ -z "$parameterX" ] || [ -z "$parameterC" ] || [ -z "$parameterP" ] || [ -z "$parameterZ" ]
 then
    echo "Some or all of the parameters are empty";
    helpFunction
@@ -46,7 +48,9 @@ fi
 echo xygeni_token: "$parameterX"
 echo cicd system: "$parameterC"
 case "$parameterC" in 
-    "jenkins" ) echo "PArameter is Jenkins" ;;
+    "jenkins" ) export JENKINS_TOKEN="$parameterP" 
+                echo "Parameter is Jenkins" 
+                echo $JENKINS_TOKEN ;;
     * ) echo "chungo" ;;
 esac
 
