@@ -30,7 +30,7 @@ helpFunction()
 
 downloadXYscanner()
 {
-    echo $0
+    echo $1
     exit 1
     curl -L https://get.xygeni.io/latest/scanner/install.sh | /bin/bash -s -- -t $0 -d ${GITHUB_WORKSPACE}/scanner
 }
