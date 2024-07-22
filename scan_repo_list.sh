@@ -82,7 +82,7 @@ counter=0
 for a in "${splitArray[@]}"; do
     echo "$a"
     ((counter++))
-    git clone "$a" dir1
+    git clone "$a" dir$counter
     pwd
     ls -al
     ls -al dir$counter
