@@ -113,6 +113,7 @@ jobs:
           #        "mouse" \
           #        "frog")
           declare -a arr=(
+                          "https://github.com/lgvorg1/secrets_local.git"
                           "element1" 
                           "element2" 
                           "element3"
@@ -124,6 +125,7 @@ jobs:
             # or do whatever with individual element of the array
           #done
           chmod +x ./scan_repo_list.sh
+           
           ./scan_repo_list.sh -d ${GITHUB_WORKSPACE} -x $XY_TOKEN -c github -p my_jx_token -z "${arr[*]}"
 
 

@@ -79,7 +79,14 @@ read -r -a splitArray <<<"$parameterZ"
 
 for a in "${splitArray[@]}"; do
     echo "$a"
+    git clone "$a" dir1
+    pwd
+    ls -l
+    ls -l dir1
 done
+
+
+
 
 
 #echo "$parameterC"
