@@ -81,8 +81,9 @@ for a in "${splitArray[@]}"; do
     echo "$a"
     git clone "$a" dir1
     pwd
-    ls -l
-    ls -l dir1
+    ls -al
+    ls -al dir1
+    exit 1
 done
 
 
