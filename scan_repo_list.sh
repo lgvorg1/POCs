@@ -27,6 +27,14 @@ helpFunction()
    exit 1 # Exit script after printing help
 }
 
+
+downloadXYscanner()
+{
+    echo $0
+    exit 1
+    curl -L https://get.xygeni.io/latest/scanner/install.sh | /bin/bash -s -- -t $0 -d ${GITHUB_WORKSPACE}/scanner
+}
+
 while getopts "d:x:c:p:z:" opt
 do
    case "$opt" in
@@ -89,6 +97,7 @@ for a in "${splitArray[@]}"; do
 done
 
 
+downloadXYscanner "$parameterX"
 
 
 
