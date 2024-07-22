@@ -18,7 +18,8 @@
 helpFunction()
 {
    echo ""
-   echo "Usage: $0 -x xygeni_token -c cicd -p cicd_token -z parameterC"
+   echo "Usage: $0 -d src_dir -x xygeni_token -c cicd -p cicd_token -z parameterC"
+   echo -e "\t-d src_dir"
    echo -e "\t-x xygeni_token"
    echo -e "\t-c cicd system"
    echo -e "\t-p cicd token"
@@ -26,9 +27,10 @@ helpFunction()
    exit 1 # Exit script after printing help
 }
 
-while getopts "x:c:p:z:" opt
+while getopts "d:x:c:p:z:" opt
 do
    case "$opt" in
+      d ) parameterD="${OPTARG}" ;;
       x ) parameterX="${OPTARG}" ;;
       c ) parameterC="${OPTARG}" ;;
       p ) parameterP="${OPTARG}" ;;
@@ -38,13 +40,14 @@ do
 done
 
 # Print helpFunction in case parameters are empty
-if [ -z "$parameterX" ] || [ -z "$parameterC" ] || [ -z "$parameterP" ] || [ -z "$parameterZ" ]
+if [ -z "$parameterD" ] || [ -z "$parameterX" ] || [ -z "$parameterC" ] || [ -z "$parameterP" ] || [ -z "$parameterZ" ]
 then
    echo "Some or all of the parameters are empty";
    helpFunction
 fi
 
 # Begin script in case all parameters are correct
+echo src_dir: "$parameterD"
 echo xygeni_token: "$parameterX"
 echo cicd system: "$parameterC"
 case "$parameterC" in 
