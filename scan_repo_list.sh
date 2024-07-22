@@ -25,7 +25,7 @@ helpFunction()
    exit 1 # Exit script after printing help
 }
 
-while getopts "a:b:c:" opt
+while getopts "x:c:z:" opt
 do
    case "$opt" in
       x ) parameterX="${OPTARG}" ;;
