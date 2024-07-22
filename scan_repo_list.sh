@@ -70,6 +70,8 @@ case "$parameterC" in
         exit 1 ;;
 esac
 
+env | grep _TOKEN
+
 read -r -a splitArray <<<"$parameterZ"
 
 for a in "${splitArray[@]}"; do

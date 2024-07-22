@@ -123,7 +123,7 @@ jobs:
             # or do whatever with individual element of the array
           #done
           chmod +x ./scan_repo_list.sh
-          ./scan_repo_list.sh -x my_xy_token -c jenkinsx -p my_jx_token -z "${arr[*]}"
+          ./scan_repo_list.sh -x my_xy_token -c github -p my_jx_token -z "${arr[*]}"
 
 
         env:
