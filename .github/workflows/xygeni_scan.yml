@@ -72,86 +72,18 @@ jobs:
           esac
 
 
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v4
-        name: Checking out PR code
-        if: ${{ github.event_name == 'pull_request_target' }}
-        with:
-          # Number of commits to fetch. 0 indicates all history for all branches and tags.
-          # Default: 1
-          fetch-depth: '0'
-          # This is to get the PR code instead of the repo code
-          ref: ${{ github.event.pull_request.head.sha }}
-
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v4
-        name: Checking out main code
-        if: ${{ github.event_name == 'push' || github.event_name == 'workflow_dispatch' }}
-        with:
-          # Number of commits to fetch. 0 indicates all history for all branches and tags..
-          # Default: 1
-          fetch-depth: '0'
-
-
-      # Runs a single command using the runners shell
-      - name: Git Log
-        run: git log
-
-      # Runs a single command using the runners shell
-      - name: Cat pr.yml 
-        run: cat README.md
 
       # Runs a set of commands using the runners shell   
       - name: Scan repo list 
         run: |
           #!/bin/bash
-          echo Downloading Xygeni Scanner ....
-          #curl -L https://get.xygeni.io/latest/scanner/install.sh | /bin/bash -s -- -u $XY_USERNAME -p $XY_PASSWORD -s $XY_URL -d ${GITHUB_WORKSPACE}/scanner
-          #${GITHUB_WORKSPACE}/scanner/xygeni scan  --never-fail  -f none --include-collaborators --run="inventory,misconf,codetamper,deps,suspectdeps,secrets,compliance,iac" --no-conf-download -n ${{ env.XY_PRJ_NAME }} --dir ${GITHUB_WORKSPACE} -e **/scanner/**
-          #myArray=("cat" \ 
-          #        "dog" \
-          #        "mouse" \
-          #        "frog")
-          declare -a arr=(
+
+          declare -a repo_list=(
                           "https://github.com/lgvorg1/secrets_local.git"
                           "https://github.com/lgvorg1/cicd_top10_1.git"
                           )
-          #for i in "${arr[@]}"
-          #do
-          #  echo "$i"
-            # or do whatever with individual element of the array
-          #done
-          chmod +x ./scan_repo_list.sh
-           
-          ./scan_repo_list.sh -d ${GITHUB_WORKSPACE} -x $XY_TOKEN -c github -p my_jx_token -z "${arr[*]}"
+
+          chmod +x ./scan_repo_list.sh           
+          ./scan_repo_list.sh -d ${GITHUB_WORKSPACE} -x $XY_TOKEN -c github -p my_cicd_token -z "${repo_list[*]}"
 
 
-        env:
-          GITHUB_PAT: ${{ secrets.GH_PAT }}
-
-
-
-
-      # Runs a set of commands using the runners shell 
-      - name: Download Xygeni Scanner 
-        run: |
-          exit 0
-          echo Downloading Xygeni Scanner ....
-
-          #curl -L https://get.xygeni.io/latest/scanner/install.sh | /bin/bash -s -- -u $XY_USERNAME -p $XY_PASSWORD -s $XY_URL -d ${GITHUB_WORKSPACE}/scanner 
-          curl -L https://get.xygeni.io/latest/scanner/install.sh | /bin/bash -s -- -u $XY_USERNAME -p $XY_PASSWORD -s $XY_URL -d ${GITHUB_WORKSPACE}/scanner 
-          
-          cat ${GITHUB_WORKSPACE}/scanner/conf/codetampering/ccm/workflow_modification.yml | grep changeTypesToConsider
-          sed -i 's/changeTypesToConsider: M/changeTypesToConsider: AM/g' ${GITHUB_WORKSPACE}/scanner/conf/codetampering/ccm/workflow_modification.yml
-          cat ${GITHUB_WORKSPACE}/scanner/conf/codetampering/ccm/workflow_modification.yml | grep changeTypesToConsider
-          cat ${GITHUB_WORKSPACE}/scanner/conf/codetampering/ccm/workflow_modification.yml 
-          
-      # Runs a set of commands using the runners shell
-      - name: Execution Xygeni Scanner (vuln)
-        run: |
-          exit 0
-          echo Executing Xygeni scan ....    
-          
-          ${GITHUB_WORKSPACE}/scanner/xygeni scan  --never-fail  -f none --include-collaborators --run="inventory,misconf,codetamper,deps,suspectdeps,secrets,compliance,iac" --no-conf-download -n ${{ env.XY_PRJ_NAME }} --dir ${GITHUB_WORKSPACE} -e **/scanner/**
-        env:
-          GITHUB_PAT: ${{ secrets.GH_PAT }}
