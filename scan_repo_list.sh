@@ -18,7 +18,7 @@
 helpFunction()
 {
    echo ""
-   echo "Usage: $0 -x xygeni_token -c cicd -c parameterC"
+   echo "Usage: $0 -x xygeni_token -c cicd -z parameterC"
    echo -e "\t-x xygeni_token"
    echo -e "\t-c cicd system"
    echo -e "\t-z Description of what is parameterC"
@@ -45,7 +45,7 @@ fi
 # Begin script in case all parameters are correct
 echo xygeni_token: "$parameterX"
 echo cicd system: "$parameterC"
-case "cicd" in $parameterC
+case "$parameterC" in 
     "jenkins" ) echo "PArameter is Jenkins" ;;
     * ) echo "chungo" ;;
 esac
