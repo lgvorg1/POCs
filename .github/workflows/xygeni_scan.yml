@@ -48,6 +48,7 @@ jobs:
               echo "PRO"
               echo XY_USERNAME=${{ secrets.XY_USERNAME_PRO }} >> $GITHUB_ENV
               echo XY_PASSWORD=${{ secrets.XY_PASSWORD_PRO }} >> $GITHUB_ENV
+              echo XY_TOKEN=${{ secrets.XY_TOKEN_PRO }} >> $GITHUB_ENV
               echo XY_URL=${{ secrets.XY_URL_PRO }} >> $GITHUB_ENV
               ;;
             DEMO)
@@ -123,7 +124,7 @@ jobs:
             # or do whatever with individual element of the array
           #done
           chmod +x ./scan_repo_list.sh
-          ./scan_repo_list.sh -x my_xy_token -c github -p my_jx_token -z "${arr[*]}"
+          ./scan_repo_list.sh -x $XY_TOKEN -c github -p my_jx_token -z "${arr[*]}"
 
 
         env:
