@@ -50,7 +50,7 @@ case "$parameterC" in
     * ) echo "chungo" ;;
 esac
 
-read -r -a splitArray <<<"$parameterC"
+read -r -a splitArray <<<"$parameterZ"
 
 for a in "${splitArray[@]}"; do
     echo "$a"
