@@ -31,8 +31,9 @@ helpFunction()
 downloadXYscanner()
 {
     echo $1
-    exit 1
-    curl -L https://get.xygeni.io/latest/scanner/install.sh | /bin/bash -s -- -t $0 -d ${GITHUB_WORKSPACE}/scanner
+    curl -L https://get.xygeni.io/latest/scanner/install.sh | /bin/bash -s -- -t $1 -d ./scanner_pro
+    ./scanner_pro/xygeni --help
+
 }
 
 while getopts "d:x:c:p:z:" opt
