@@ -45,4 +45,6 @@ fi
 # Begin script in case all parameters are correct
 echo "$parameterA"
 echo "$parameterB"
-echo "$parameterC"
+#echo "$parameterC"
+for a in "${parameterC[@]}"; do
+    echo "$a"
