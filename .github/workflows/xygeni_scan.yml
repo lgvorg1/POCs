@@ -110,7 +110,8 @@ jobs:
                   "dog" \
                   "mouse" \
                   "frog")
-          declare -a arr=("element1" 
+          declare -a arr=(
+                          "element1" 
                           "element2" 
                           "element3"
                           "element4"
