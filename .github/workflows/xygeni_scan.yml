@@ -41,7 +41,7 @@ jobs:
                           "https://github.com/lgvorg1/cicd_top10_1.git"
                           )
 
-          chmod +x ./scan_repo_list.sh           
-           ${GITHUB_WORKSPACE}/scan_repo_list.sh -d ${GITHUB_WORKSPACE} -x $XY_TOKEN -c github -p my_cicd_token -z "${repo_list[*]}"
+          chmod +x ${GITHUB_WORKSPACE}/scan_repo_list.sh           
+          ${GITHUB_WORKSPACE}/scan_repo_list.sh -d ${GITHUB_WORKSPACE} -x $XY_TOKEN -c github -p my_cicd_token -z "${repo_list[*]}"
 
 
