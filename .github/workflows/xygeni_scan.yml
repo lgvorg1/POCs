@@ -51,6 +51,6 @@ jobs:
                           )
 
           chmod +x ${GITHUB_WORKSPACE}/scan_repo_list.sh           
-          ${GITHUB_WORKSPACE}/scan_repo_list.sh -d ${GITHUB_WORKSPACE} -x $XY_TOKEN -c github -p my_cicd_token -z "${repo_list[*]}"
+          ${GITHUB_WORKSPACE}/scan_repo_list.sh -d ${GITHUB_WORKSPACE} -x $XY_TOKEN -c github -p ${{ secrets.GH_PAT }} -z "${repo_list[*]}"
 
 
