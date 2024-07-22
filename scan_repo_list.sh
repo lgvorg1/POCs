@@ -32,15 +32,13 @@ downloadXYscanner()
 {
     echo $1
     curl -L https://get.xygeni.io/latest/scanner/install.sh | /bin/bash -s -- -t $1 -d ./scanner_pro
-    ./scanner_pro/xygeni --help
-
 }
 
 executeXYscanner()
 {
     echo $1
-    #./scanner/xygeni scan  --include-collaborators --run="inventory,misconf,codetamper,deps,suspectdeps,secrets,compliance,iac" -n $1 --dir $1 -e **/scanner_pro/**
-    ./scanner/xygeni scan  --include-collaborators --run="inventory,misconf,codetamper,deps,suspectdeps,secrets,compliance,iac" -n $1 -repo=$1 -e **/scanner_pro/**
+    #./scanner_pro/xygeni scan  --include-collaborators --run="inventory,misconf,codetamper,deps,suspectdeps,secrets,compliance,iac" -n $1 --dir $1 -e **/scanner_pro/**
+    ./scanner_pro/xygeni scan  --include-collaborators --run="inventory,misconf,codetamper,deps,suspectdeps,secrets,compliance,iac" -n $1 -repo=$1 -e **/scanner_pro/**
 }
 
 while getopts "d:x:c:p:z:" opt
