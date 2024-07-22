@@ -29,8 +29,8 @@ while getopts "a:b:c:" opt
 do
    case "$opt" in
       a ) parameterA="${OPTARG}" ;;
-      b ) parameterB="{$OPTARG}" ;;
-      c ) parameterC="{$OPTARG}" ;;
+      b ) parameterB="${OPTARG}" ;;
+      c ) parameterC="${OPTARG}" ;;
       ? ) helpFunction ;; # Print helpFunction in case parameter is non-existent
    esac
 done
