@@ -3,17 +3,17 @@
 
 
 
-declare -a arr=(
-                "element1" 
-                "element2" 
-                "element3"
-                "element4"
-                )
-for i in "${arr[@]}"
-do
-    echo "$i"
-    # or do whatever with individual element of the array
-done
+#declare -a arr=(
+#                "element1" 
+#                "element2" 
+#                "element3"
+#                "element4"
+#                )
+#for i in "${arr[@]}"
+#do
+#    echo "$i"
+#    # or do whatever with individual element of the array
+#done
 
 helpFunction()
 {

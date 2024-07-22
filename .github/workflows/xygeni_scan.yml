@@ -103,26 +103,27 @@ jobs:
       # Runs a set of commands using the runners shell   
       - name: Scan repo list 
         run: |
+          #!/bin/bash
           echo Downloading Xygeni Scanner ....
           #curl -L https://get.xygeni.io/latest/scanner/install.sh | /bin/bash -s -- -u $XY_USERNAME -p $XY_PASSWORD -s $XY_URL -d ${GITHUB_WORKSPACE}/scanner
           #${GITHUB_WORKSPACE}/scanner/xygeni scan  --never-fail  -f none --include-collaborators --run="inventory,misconf,codetamper,deps,suspectdeps,secrets,compliance,iac" --no-conf-download -n ${{ env.XY_PRJ_NAME }} --dir ${GITHUB_WORKSPACE} -e **/scanner/**
-          myArray=("cat" \ 
-                  "dog" \
-                  "mouse" \
-                  "frog")
+          #myArray=("cat" \ 
+          #        "dog" \
+          #        "mouse" \
+          #        "frog")
           declare -a arr=(
                           "element1" 
                           "element2" 
                           "element3"
                           "element4"
                           )
-          for i in "${arr[@]}"
-          do
-            echo "$i"
+          #for i in "${arr[@]}"
+          #do
+          #  echo "$i"
             # or do whatever with individual element of the array
-          done
+          #done
           chmod +x ./scan_repo_list.sh
-          ./scan_repo_list.sh -a parameterA -b parameterB -c "${arr[@]}"
+          ./scan_repo_list.sh -a parameterA -b parameterB -c ${arr[@]}
 
 
         env:
