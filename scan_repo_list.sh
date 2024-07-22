@@ -86,7 +86,6 @@ for a in "${splitArray[@]}"; do
     pwd
     ls -al
     ls -al dir$counter
-    exit 1
 done
 
 
