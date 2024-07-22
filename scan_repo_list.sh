@@ -48,3 +48,4 @@ echo "$parameterB"
 #echo "$parameterC"
 for a in "${parameterC[@]}"; do
     echo "$a"
+done
