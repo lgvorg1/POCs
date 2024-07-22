@@ -37,7 +37,7 @@ jobs:
         with:
           # Number of commits to fetch. 0 indicates all history for all branches and tags..
           # Default: 1
-          fetch-depth: '0
+          fetch-depth: '0'
 
 
       # Runs a set of commands using the runners shell   
