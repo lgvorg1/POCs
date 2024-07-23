@@ -25,6 +25,9 @@ stages {
                 println "master0 [" + master0 + "]"
                 master1 = env.BUILD_URL.split('/')[1]
                 println "master1 [" + master1 + "]"
+                master_todo = env.BUILD_URL
+                println "master_todo [" + master_todo + "]"
+
                 withEnv(["JENKINS_MASTER=${master}"]) {
                 sh """#!/bin/bash
 
