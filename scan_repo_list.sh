@@ -65,22 +65,22 @@ echo xygeni_token: "$parameterX"
 echo cicd system: "$parameterC"
 case "$parameterC" in 
     "jenkins" ) export JENKINS_TOKEN="$parameterP" 
-                echo "Parameter is Jenkins" 
+                echo "Parameter is Jenkins" ;;
     "gitlab" ) export GITLAB_TOKEN="$parameterP" 
-                echo "Parameter is GitLab" 
+                echo "Parameter is GitLab" ;; 
     "bitbucket" ) export BITBUCKET_TOKEN="$parameterP" 
-                echo "Parameter is BitBucket" 
+                echo "Parameter is BitBucket" ;;
     "azure_devops" ) export AZURE_TOKEN="$parameterP" 
-                echo "Parameter is Azure DevOps" 
+                echo "Parameter is Azure DevOps" ;;
     "github" ) export GITHUB_TOKEN="$parameterP" 
-                echo "Parameter is GitHub" 
+                echo "Parameter is GitHub" ;;
     "circle_ci" ) export CIRCLECI_TOKEN="$parameterP" 
-                echo "Parameter is Circle CI" 
+                echo "Parameter is Circle CI" ;;
     * ) echo -e "\t-c cicd system [$parameterC] not valid. valid values [jenkins|gitlab|bitbucket|azure_devops|github|circle_ci]"
         exit 1 ;;
 esac
 
-#env | grep _TOKEN
+env | grep _TOKEN
 
 read -r -a splitArray <<<"$parameterZ"
 
