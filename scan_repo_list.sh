@@ -52,7 +52,7 @@ updateConfJenkins()
      #cat ./kk.txt
      cp $1/kk.txt $1/conf/xygeni.yml
      grep url  $1/conf/xygeni.yml
-     diff $1/kk.txt $1/scanner_pro/conf/xygeni.yml
+     diff $1/kk.txt $1/conf/xygeni.yml
 
 }
 
