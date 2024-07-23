@@ -1,0 +1,40 @@
+pipeline {
+  agent { label 'linux' } 
+
+environment {
+    vGITLAB_TOKEN        = credentials('GITLAB_PAT')
+    vJENKINS_TOKEN       = credentials('JENKINS_TOKEN')
+    vXY_TOKEN            = credentials('XYGENI_TOKEN_PRO')
+  }
+
+
+stages {
+
+
+    stage('Execute Xygeni Scan') {
+      //agent { label 'linux' } 
+          steps {
+              script {
+                println "REPO Name [" + "${JOB_BASE_NAME}" + "]" 
+                master = Jenkins.getInstance().getComputer('').getHostName()
+                println "master [" + master + "]"
+                return
+
+                sh """#!/bin/bash
+
+                    declare -a repo_list=(
+                          "https://gitlab.com/xygroup1/xy-onboarding.git"
+                          "https://gitlab.com/xygroup1/gl_cicd_top10_1.git"
+                          )
+
+                    chmod +x $WORKSPACE/scan_repo_list.sh           
+                    $WORKSPACE/scan_repo_list.sh -d $WORKSPACE -x ${env.vXY_TOKEN} -c jenkins_github -p ${env.vGITLAB_TOKEN} -z "\${repo_list[*]}"
+
+                """
+              }
+          }
+    }
+  
+  } 
+
+}

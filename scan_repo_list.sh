@@ -1,20 +1,6 @@
 #!/bin/bash
 
 
-
-
-#declare -a arr=(
-#                "element1" 
-#                "element2" 
-#                "element3"
-#                "element4"
-#                )
-#for i in "${arr[@]}"
-#do
-#    echo "$i"
-#    # or do whatever with individual element of the array
-#done
-
 helpFunction()
 {
    echo ""
@@ -38,6 +24,13 @@ executeXYscanner()
 {
     #./scanner_pro/xygeni scan  --include-collaborators --run="inventory,misconf,codetamper,deps,suspectdeps,secrets,compliance,iac" -n $1 --dir $1 -e **/scanner_pro/**
     ./scanner_pro/xygeni scan  --include-collaborators --run="inventory,misconf,codetamper,deps,suspectdeps,secrets,compliance,iac" -repo=$1 -e **/scanner_pro/**
+}
+
+
+updateConfJenkins()
+{
+    #export JENKINS_MASTER=127.0.0.1:8080
+    #cat conf/xygeni.yml | tr '\n' '\r' | sed -e "s/kind: jenkins\r    # Jenkins base URL\r    url: ''/kind: jenkins\r    # Jenkins base URL\r    url: 'http:\/\/$JENKINS_MASTER'"/g  | tr '\r' '\n' > conf/xygeni.yml 
 }
 
 while getopts "d:x:c:p:j:z:" opt
@@ -66,6 +59,8 @@ echo cicd system: "$parameterC"
 case "$parameterC" in 
     "jenkins_github" ) export GITHUB_TOKEN="$parameterP" 
                 echo "Parameter is Jenkins GitHub" ;;
+    "jenkins_gitlab" ) export GITLAB_TOKEN="$parameterP" 
+                echo "Parameter is Jenkins GitLab" ;;
     "gitlab" ) export GITLAB_TOKEN="$parameterP" 
                 echo "Parameter is GitLab" ;; 
     "bitbucket" ) export BITBUCKET_TOKEN="$parameterP" 
@@ -76,7 +71,7 @@ case "$parameterC" in
                 echo "Parameter is GitHub" ;;
     "circle_ci" ) export CIRCLECI_TOKEN="$parameterP" 
                 echo "Parameter is Circle CI" ;;
-    * ) echo -e "\t-c cicd system [$parameterC] not valid. valid values [jenkins_github|gitlab|bitbucket|azure_devops|github|circle_ci]"
+    * ) echo -e "\t-c cicd system [$parameterC] not valid. valid values [jenkins_github|jenkins_gitlab|gitlab|bitbucket|azure_devops|github|circle_ci]"
         exit 1 ;;
 esac
 
@@ -88,6 +83,7 @@ read -r -a splitArray <<<"$parameterZ"
 
 
 downloadXYscanner "$parameterX"
+
 
 counter=0
 for a in "${splitArray[@]}"; do
