@@ -43,7 +43,7 @@ stages {
                           )
 
                     chmod +x $WORKSPACE/scan_repo_list.sh           
-                    $WORKSPACE/scan_repo_list.sh -d $WORKSPACE -x ${vXY_TOKEN} -c jenkins_gitlab -p ${vGITLAB_TOKEN} -z "\${repo_list[*]}"
+                    $WORKSPACE/scan_repo_list.sh -d $WORKSPACE -x ${env.vXY_TOKEN} -c jenkins_gitlab -p ${vGITLAB_TOKEN} -z "\${repo_list[*]}"
 
                 """
               }
