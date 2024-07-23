@@ -7,7 +7,6 @@ pipeline {
   //  }
 
 environment {
-    MY_SECRET           = credentials('MY_SECRET')
     GITHUB_TOKEN        = credentials('GH_PAT')
     JENKINS_TOKEN       = credentials('JENKINS_TOKEN')
     XY_TOKEN            = credentials('XYGENI_TOKEN_PRO')
@@ -17,6 +16,31 @@ environment {
 
 
 stages {
+
+
+    stage('Execute Xygeni Scan') {
+      //agent { label 'linux' } 
+          steps {
+              script {
+                println "REPO Name [" + "${JOB_BASE_NAME}" + "]" 
+                sh '''
+                    #!/bin/bash
+
+                    declare -a repo_list=(
+                          "https://github.com/lgvorg1/secrets_local.git"
+                          "https://github.com/lgvorg1/cicd_top10_1.git"
+                          )
+
+                    chmod +x $WORKSPACE/scan_repo_list.sh           
+                    $WORKSPACE/scan_repo_list.sh -d $WORKSPACE -x ${env.XY_TOKEN} -c jenkins -p ${env.GITHUB_TOKEN} ${{ secrets.GH_PAT }} -z "${repo_list[*]}"
+
+                    exit 1
+                '''
+              }
+          }
+    }
+
+
 
     stage('Test') {
       //agent { label 'linux' } 
