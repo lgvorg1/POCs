@@ -18,12 +18,12 @@
 helpFunction()
 {
    echo ""
-   echo "Usage: $0 -d src_dir -x xygeni_token -c cicd -p scm_token -z parameterC"
+   echo "Usage: $0 -d src_dir -x xygeni_token -c cicd -p cicd_token -z repo_list"
    echo -e "\t-d src_dir"
    echo -e "\t-x xygeni_token"
    echo -e "\t-c cicd system"
-   echo -e "\t-p scm token"
-   echo -e "\t-z Description of what is parameterC"
+   echo -e "\t-p cicd token"
+   echo -e "\t-z arraylist of repos"
    exit 1 # Exit script after printing help
 }
 
