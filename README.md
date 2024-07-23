@@ -46,7 +46,7 @@ The shell script will donwload the Xygeni scanner and will loop over the provide
 ## Usage into a CI/CD pipeline
 Below you can find examples of how to call the scan_repo_list.sh from different CI/CD pipelines.
 
-[GitHub pipeline](./github/worflows/xygeni_scan.yml)
+[GitHub pipeline](./.github/worflows/xygeni_scan.yml)
 
 [GitLab pipeline](./.gitlab-ci.yml) 
 
