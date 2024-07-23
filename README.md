@@ -4,7 +4,7 @@
 This repo provides an easy way to **Xygeni onboarding**.
 Here you will find some <ins>ready-to-use scripts to trigger a Xygeni scan</ins>.
 
-Tha basic element is a bash shell script [here](./scan_repo_list.sh)   **scan_repo_list.sh** that <ins>wraps the downloading and execution of Xygeni scanner over a list of git repositories</ins>.
+Tha basic element is a bash shell script [scan_repo_list.sh](./scan_repo_list.sh) that <ins>wraps the downloading and execution of Xygeni scanner **over a list of git repositories**</ins>.
 If you feel confortable with bash scripting, you can view this shell script and modify according to your specific needs.
 
 
@@ -13,12 +13,14 @@ If you feel confortable with bash scripting, you can view this shell script and 
 ## Basic usage (in a a bash command line)
 Basically, scan_repo_list.sh expects the following parameters
 
-   scan_repo_list.sh -d src_dir -x xygeni_token -c cicd -p cicd_token -z repo_list"
+```
+    scan_repo_list.sh -d src_dir -x xygeni_token -c cicd -p cicd_token -z repo_list
         -d <directory path where the scanner will be downloaded> 
         -x <xygeni token>
         -c <cicd system, valid values : jenkins_github|gitlab|bitbucket|azure_devops|github|circle_ci >
         -p <cicd token, i.e. a valid PAT that will be used by Xygeni scanner to connect to the SCM/CICD system and recover security information>
         -z <arraylist of repos to scan>
+```
 
 An example of scan_repo_list.sh invocation might be as follows
 
@@ -43,3 +45,12 @@ The shell script will donwload the Xygeni scanner and will loop over the provide
 
 ## Usage into a CI/CD pipeline
 Below you can find examples of how to call the scan_repo_list.sh from different CI/CD pipelines.
+
+[GitHub pipeline](./github/worflows/xygeni_scan.yml)
+
+[GitLab pipeline](./.gitlab-ci.yml) 
+
+[Azure DevOps pipeline](./ADO_pipeline.yml) 
+
+[Jenkins pipeline](./Jenkinsfile) 
+
