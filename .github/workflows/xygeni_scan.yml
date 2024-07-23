@@ -23,7 +23,6 @@ on:
 
  
 env:
-  
   XY_TOKEN: ${{ secrets.XY_TOKEN_PRO }}
 
 

@@ -1,0 +1,96 @@
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+
+variables:
+  workingDirectory: '$(System.DefaultWorkingDirectory)/'
+
+stages:
+- stage: Security
+  variables:
+    - name: System.Debug
+      value: false
+    - group: PRO
+    - name: vXY_USERNAME
+      value: $[variables.XY_USERNAME]
+    - name: vXY_PASSWORD
+      value: $[variables.XY_PASSWORD]
+    - name: vXY_URL
+      value: $[variables.XY_URL]
+    - name: vAZURE_TOKEN
+      value: $[variables.AZ_PAT]
+    - name: vMY_SECRET
+      value: $[variables.MY_SECRET]
+  jobs:
+  - job: "Xy_Scanner_on_PUSH"
+    steps:
+    
+    - checkout: self
+      fetchDepth: 10
+
+    
+
+
+
+    - task: Bash@3
+      displayName: 'Show vars '
+      inputs:
+        targetType: 'inline'
+        script: |
+            ls -l
+            java -version
+            whoami
+            pwd 
+            echo $(vXY_USERNAME)
+            echo $(vXY_PASSWORD)
+            echo 
+            echo $(vXY_URL)
+            echo $(vMY_SECRET)
+
+    - script: |
+        echo $(AZURE_TOKEN)
+        env
+        env | grep AZURE_TOKEN
+      workingDirectory: $(workingDirectory)
+      displayName: 'XXXXX'
+      env:
+        AZURE_TOKEN: $(AZURE_TOKEN)
+
+    - script: |
+        echo $(AZURE_TOKEN)
+        env
+        #env | grep AZURE_TOKEN
+      workingDirectory: $(workingDirectory)
+      displayName: 'YYYYY'
+
+    - task: CmdLine@2
+      displayName: 'Install and run xygeni scanner'
+      env:
+        xxAZURE_TOKEN: $(vAZURE_TOKEN)
+      inputs:
+        script: |
+
+            #!/bin/bash
+
+            declare -a repo_list=(
+                          "https://github.com/lgvorg1/secrets_local.git"
+                          "https://github.com/lgvorg1/cicd_top10_1.git"
+                          )
+
+            chmod +x $(Build.SourcesDirectory)/scan_repo_list.sh           
+            $(Build.SourcesDirectory)/scan_repo_list.sh -d $(Build.SourcesDirectory) -x $(vXY_TOKEN) -c azure_devops -p $(vAZURE_TOKEN) -z "${repo_list[*]}"
+
+
+            curl -L https://get.xygeni.io/latest/scanner/install.sh | /bin/bash -s -- -u $(vXY_USERNAME) -p $(vXY_PASSWORD) -s $(vXY_URL) -d $(Build.SourcesDirectory)/scanner
+            ls -l
+            #cat $(Build.SourcesDirectory)/scanner/conf/misconfigurations/unprotected_branch.yml
+            #$(Build.SourcesDirectory)/scanner/xygeni util conf-update
+            #cat $(Build.SourcesDirectory)/scanner/conf/misconfigurations/unprotected_branch.yml
+            env | grep AZURE_TOKEN
+            
+            $(Build.SourcesDirectory)/scanner/xygeni scan --never-fail --include-collaborators --run="inventory,misconf,codetamper,deps,suspectdeps,secrets,compliance,iac" --no-conf-download -n $(System.TeamProject) --dir $(Build.SourcesDirectory) -e **/scanner/**
+
+    
