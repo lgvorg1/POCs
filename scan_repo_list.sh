@@ -19,7 +19,7 @@ downloadXYscanner()
     echo 1: $1
     echo 2: $2
 
-    rm -rf $2
+    #rm -rf $2
     curl -L https://get.xygeni.io/latest/scanner/install.sh | /bin/bash -s -- -t $1 -d $2
 }
 
