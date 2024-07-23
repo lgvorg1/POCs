@@ -4,7 +4,7 @@
 This repo provides an easy way to **Xygeni onboarding**.
 Here you will find some <ins>ready-to-use scripts to trigger a Xygeni scan</ins>.
 
-Tha basic element is a bash shell script **scan_repo_list.sh** that <ins>wraps the downloading and execution of Xygeni scanner over a list of git repositories</ins>.
+Tha basic element is a bash shell script [here](./scan_repo_list.sh)   **scan_repo_list.sh** that <ins>wraps the downloading and execution of Xygeni scanner over a list of git repositories</ins>.
 If you feel confortable with bash scripting, you can view this shell script and modify according to your specific needs.
 
 
