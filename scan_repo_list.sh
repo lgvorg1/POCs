@@ -45,6 +45,10 @@ updateConfJenkins()
     rm -rf $1/kk.txt
     #cat ./scanner_pro/conf/xygeni.yml | tr '\n' '\r' | sed -e "s/kind: jenkins\r    # Jenkins base URL\r    url: ''/kind: jenkins\r    # Jenkins base URL\r    url: 'http:\/\/$JENKINS_MASTER'"/g  | tr '\r' '\n' > ./scanner_pro/conf/xygeni.yml 
     # cat ./scanner_pro/conf/xygeni.yml | tr '\n' '\r' | sed -e "s/kind: jenkins\r    # Jenkins base URL\r    url: ''/kind: jenkins\r    # Jenkins base URL\r    url: '$JENKINS_PROTO\/\/$JENKINS_MASTER'"/g  | tr '\r' '\n' > ./kk.txt
+    TXT1="kind: jenkins\r    # Jenkins base URL\r    url: ''\r    # Which projects use this CI\/CD system?\r    # Use a regex pattern, like 'project1|project2|project3' or 'prefix_.*'\r    # Leave empty for matching any project for the given jenkins kind\r    usedBy: ''\r    # The username to connect to the CI\/CD API.\r    user: null" 
+    TXT2="kind: jenkins\r    # Jenkins base URL\r    url: '$JENKINS_PROTO\/\/$JENKINS_MASTER'\r    # Which projects use this CI\/CD system?\r    # Use a regex pattern, like 'project1|project2|project3' or 'prefix_.*'\r    # Leave empty for matching any project for the given jenkins kind\r    usedBy: ''\r    # The username to connect to the CI\/CD API.\r    user: $JENKINS_USER"
+    grep TXT1 $1/conf/xygeni.yml
+    exit 1
     cat $1/conf/xygeni.yml | tr '\n' '\r' | sed -e "s/kind: jenkins\r    # Jenkins base URL\r    url: ''\r    # Which projects use this CI\/CD system?\r    # Use a regex pattern, like 'project1|project2|project3' or 'prefix_.*'\r    # Leave empty for matching any project for the given jenkins kind\r    usedBy: ''\r    # The username to connect to the CI\/CD API.\r    user: null/kind: jenkins\r    # Jenkins base URL\r    url: '$JENKINS_PROTO\/\/$JENKINS_MASTER'\r    # Which projects use this CI\/CD system?\r    # Use a regex pattern, like 'project1|project2|project3' or 'prefix_.*'\r    # Leave empty for matching any project for the given jenkins kind\r    usedBy: ''\r    # The username to connect to the CI\/CD API.\r    user: $JENKINS_USER"/g   | tr '\r' '\n' > $1/kk.txt 
 
      echo XXXXXXXXXXXXXXXXXXXXXXXXXXXXX

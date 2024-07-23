@@ -18,20 +18,13 @@ stages {
           steps {
               script {
 
-
                 println "REPO Name [" + "${JOB_BASE_NAME}" + "]" 
                 //master = Jenkins.getInstance().getComputer('').getHostName()
                 //println "master [" + master + "]"
-                //port = env.BUILD_URL.split('/')[2].split(':')[0]
-                //println "port [" + port + "]"
                 master = env.BUILD_URL.split('/')[2]
                 println "master [" + master + "]"
                 prot = env.BUILD_URL.split('/')[0]
                 println "prot [" + prot + "]"
-                //master1 = env.BUILD_URL.split('/')[1]
-                //println "master1 [" + master1 + "]"
-                //master_todo = env.BUILD_URL
-                //println "master_todo [" + master_todo + "]"
 
                 withEnv(["JENKINS_MASTER=${master}", "JENKINS_PROTO=${prot}", "JENKINS_USER=${vJENKINS_USER}", "JENKINS_TOKEN=${vJENKINS_TOKEN}" ]) {
                 sh """#!/bin/bash
