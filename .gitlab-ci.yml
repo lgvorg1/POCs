@@ -16,7 +16,7 @@ Xygeni-job:
   #image: ubuntu@sha256:55e5613c8c7bcd8044aaf09d64d20518964a0d7a6e41af129f95b731301c2659
   #image: alpine@sha256:71465c7d45a086a2181ce33bb47f7eaef5c233eace65704da0c5e5454a79cee5
   #image: maven:3-jdk-11
-  image: ubuntu-latest
+  image: ubuntu:latest
   rules:
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_PIPELINE_SOURCE == "merge_request_event"'
   #rules:
