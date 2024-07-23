@@ -74,7 +74,7 @@ case "$parameterC" in
                 echo "Parameter is BitBucket" 
                 echo $BITBUCKET_TOKEN ;;
     "azure_devops" ) export AZURE_TOKEN="$parameterP" 
-                echo "Parameter is BitBucket" 
+                echo "Parameter is Azure DevOps" 
                 echo $AZURE_TOKEN ;;
     "github" ) export GITHUB_TOKEN="$parameterP" 
                 echo "Parameter is GitHub" 

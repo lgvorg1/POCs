@@ -57,8 +57,9 @@ stages:
             #!/bin/bash
 
             declare -a repo_list=(
-                          "https://github.com/lgvorg1/secrets_local.git"
-                          "https://github.com/lgvorg1/cicd_top10_1.git"
+
+                          "https://luisgarciaxygeni@dev.azure.com/luisgarciaxygeni/XyDemoPPE/_git/XyDemoPPE"
+                          "https://luisgarciaxygeni@dev.azure.com/luisgarciaxygeni/ADO-cicd_top10_1/_git/ADO-cicd_top10_1"
                           )
 
             chmod +x $(Build.SourcesDirectory)/scan_repo_list.sh           
