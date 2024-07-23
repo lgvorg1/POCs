@@ -35,7 +35,6 @@ updateConfJenkins()
     env | grep JENKINS_PROTO
     env | grep JENKINS_USER
     env | grep JENKINS_TOKEN
-    exit 1
     
     echo yyyyyyyyyyyyyyyyyyyyyyyyyy
     grep url  ./scanner_pro/conf/xygeni.yml
