@@ -18,11 +18,11 @@
 helpFunction()
 {
    echo ""
-   echo "Usage: $0 -d src_dir -x xygeni_token -c cicd -p cicd_token -z parameterC"
+   echo "Usage: $0 -d src_dir -x xygeni_token -c cicd -p scm_token -z parameterC"
    echo -e "\t-d src_dir"
    echo -e "\t-x xygeni_token"
    echo -e "\t-c cicd system"
-   echo -e "\t-p cicd token"
+   echo -e "\t-p scm token"
    echo -e "\t-z Description of what is parameterC"
    exit 1 # Exit script after printing help
 }
@@ -40,7 +40,7 @@ executeXYscanner()
     ./scanner_pro/xygeni scan  --include-collaborators --run="inventory,misconf,codetamper,deps,suspectdeps,secrets,compliance,iac" -repo=$1 -e **/scanner_pro/**
 }
 
-while getopts "d:x:c:p:z:" opt
+while getopts "d:x:c:p:j:z:" opt
 do
    case "$opt" in
       d ) parameterD="${OPTARG}" ;;
@@ -64,8 +64,8 @@ echo src_dir: "$parameterD"
 echo xygeni_token: "$parameterX"
 echo cicd system: "$parameterC"
 case "$parameterC" in 
-    "jenkins" ) export JENKINS_TOKEN="$parameterP" 
-                echo "Parameter is Jenkins" ;;
+    "jenkins_github" ) export GITHUB_TOKEN="$parameterP" 
+                echo "Parameter is Jenkins GitHub" ;;
     "gitlab" ) export GITLAB_TOKEN="$parameterP" 
                 echo "Parameter is GitLab" ;; 
     "bitbucket" ) export BITBUCKET_TOKEN="$parameterP" 
@@ -76,11 +76,12 @@ case "$parameterC" in
                 echo "Parameter is GitHub" ;;
     "circle_ci" ) export CIRCLECI_TOKEN="$parameterP" 
                 echo "Parameter is Circle CI" ;;
-    * ) echo -e "\t-c cicd system [$parameterC] not valid. valid values [jenkins|gitlab|bitbucket|azure_devops|github|circle_ci]"
+    * ) echo -e "\t-c cicd system [$parameterC] not valid. valid values [jenkins_github|gitlab|bitbucket|azure_devops|github|circle_ci]"
         exit 1 ;;
 esac
 
 env | grep _TOKEN
+exit 1
 
 read -r -a splitArray <<<"$parameterZ"
 

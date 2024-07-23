@@ -7,9 +7,9 @@ pipeline {
   //  }
 
 environment {
-    GITHUB_TOKEN        = credentials('GH_PAT')
-    JENKINS_TOKEN       = credentials('JENKINS_TOKEN')
-    XY_TOKEN            = credentials('XYGENI_TOKEN_PRO')
+    vGITHUB_TOKEN        = credentials('GH_PAT')
+    vJENKINS_TOKEN       = credentials('JENKINS_TOKEN')
+    vXY_TOKEN            = credentials('XYGENI_TOKEN_PRO')
     //PROJECT_NAME        ="${JOB_BASE_NAME}"
     //XY_PROJECT_NAME     = ${currentBuild.fullProjectName}"
   }
@@ -31,7 +31,7 @@ stages {
                           )
 
                     chmod +x $WORKSPACE/scan_repo_list.sh           
-                    $WORKSPACE/scan_repo_list.sh -d $WORKSPACE -x ${env.XY_TOKEN} -c jenkins -p ${env.GITHUB_TOKEN} -z "\${repo_list[*]}"
+                    $WORKSPACE/scan_repo_list.sh -d $WORKSPACE -x ${env.vXY_TOKEN} -c jenkins_github -p ${env.vGITHUB_TOKEN} -z "\${repo_list[*]}"
 
                     exit 1
                 """
