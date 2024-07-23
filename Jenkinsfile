@@ -8,12 +8,11 @@ pipeline {
 
 environment {
     MY_SECRET           = credentials('MY_SECRET')
-    XY_URL              = credentials("XY_URL_${params.XYGENI_ENV}")
-    XY_CRED             = credentials("XY_CRED_${params.XYGENI_ENV}")
-    GH_PAT              = credentials('GH_PAT')
+    GITHUB_TOKEN        = credentials('GH_PAT')
     JENKINS_TOKEN       = credentials('JENKINS_TOKEN')
+    XY_TOKEN            = credentials('XYGENI_TOKEN_PRO')
     //PROJECT_NAME        ="${JOB_BASE_NAME}"
-    XY_PROJECT_NAME        ="Jenkins_CICD" //${currentBuild.fullProjectName}"
+    //XY_PROJECT_NAME     = ${currentBuild.fullProjectName}"
   }
 
 
@@ -27,6 +26,9 @@ stages {
                 println "REPO Name [" + "${JOB_BASE_NAME}" + "]" 
                 sh '''
                  cat README.md
+                 pwd
+                 ls -l 
+                 exit 1
                 '''
               }
           }
