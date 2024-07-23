@@ -1,16 +1,16 @@
 # POCs
 
 
-This repo provides an easy way to Xygeni onboarding.
-The main purpose of this repo is to provide some ready-to-use scrips to trigger a Xygeni scan
+This repo provides an easy way to **Xygeni onboarding**.
+Here you will find some <ins>ready-to-use scripts to trigger a Xygeni scan</ins>.
 
-Tha basic element is a bash shell script (scan_repo_list.sh) that wraps the download and execution of Xygeni scanner over a list of git repositories.
+Tha basic element is a bash shell script **scan_repo_list.sh** that <ins>wraps the downloading and execution of Xygeni scanner over a list of git repositories</ins>.
 If you feel confortable with bash scripting, you can view this shell script and modify according to your specific needs.
 
 
-scan_repo_list.sh can be executed either from a unix command line or from a CI/CD pipeline.
-Below you can find examples of executing scan_repo_list.sh from different CI/CD pipelines.
+**scan_repo_list.sh** can be executed either from a unix command line or from a CI/CD pipeline.
 
+## Basic usage (in a a bash command line)
 Basically, scan_repo_list.sh expects the following parameters
 
    scan_repo_list.sh -d src_dir -x xygeni_token -c cicd -p cicd_token -z repo_list"
@@ -31,8 +31,15 @@ An example of scan_repo_list.sh invocation might be as follows
            
     ./scan_repo_list.sh -d /tmp -x $XY_TOKEN -c github -p $GITHUB_TOKEN -z "${repo_list[*]}"
 
-Requirements:
 
-* You will need, as minimun, one Xyegni token that will be used by the scanner to authenticate against you Xygeni tenant. Ask your Xygeni sales rep for valid token.
-* Just in case you want to execute the CI/CD scan (to find vulnerabilities in your SCM/CICD system configuration), you will need an additional token to authenticate against your SCM/CICD platform. For example, if you are using GitHub you will need a GitHub PAT so the scanner can connect to your GitHub organization and scan for vulnerabilities.
-* 
+The shell script will donwload the Xygeni scanner and will loop over the provided list of repos, executing the Xygeni scanner for each of them.
+
+## Requirements
+
+* You will need, as minimun, one **Xygeni token** that will be used by the scanner to authenticate against you Xygeni tenant. Ask your Xygeni sales rep for valid token.
+* Just in case you want to execute the CI/CD scan (to find vulnerabilities in your SCM/CICD system configuration), you will need an **additional token** to authenticate against your SCM/CICD platform. For example, if you are using GitHub you will need a GitHub PAT so the scanner can connect to your GitHub organization and scan for vulnerabilities.
+* **Java 11+** JRE must be available in the path
+* The **package manager binaries** (mvn,npm, etc) used by your repo
+
+## Usage into a CI/CD pipeline
+Below you can find examples of how to call the scan_repo_list.sh from different CI/CD pipelines.
