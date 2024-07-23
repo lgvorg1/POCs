@@ -17,6 +17,7 @@ helpFunction()
 downloadXYscanner()
 {
     echo $1
+    rm -rf ./scanner_pro
     curl -L https://get.xygeni.io/latest/scanner/install.sh | /bin/bash -s -- -t $1 -d ./scanner_pro
 }
 
@@ -31,8 +32,10 @@ updateConfJenkins()
 {
     #export JENKINS_MASTER=127.0.0.1:8080
     env | grep JENKINS_MASTER
+    echo ===================
     grep url  ./scanner_pro/conf/xygeni.yml
     cat ./scanner_pro/conf/xygeni.yml | tr '\n' '\r' | sed -e "s/kind: jenkins\r    # Jenkins base URL\r    url: ''/kind: jenkins\r    # Jenkins base URL\r    url: 'http:\/\/$JENKINS_MASTER'"/g  | tr '\r' '\n' > ./scanner_pro/conf/xygeni.yml 
+     echo ===================
     grep url  ./scanner_pro/conf/xygeni.yml
     exit 1
 }
