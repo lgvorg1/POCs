@@ -21,6 +21,10 @@ stages {
                 //println "port [" + port + "]"
                 master = env.BUILD_URL.split('/')[2]
                 println "master [" + master + "]"
+                master0 = env.BUILD_URL.split('/')[0]
+                println "master0 [" + master0 + "]"
+                master1 = env.BUILD_URL.split('/')[1]
+                println "master1 [" + master1 + "]"
                 withEnv(["JENKINS_MASTER=${master}"]) {
                 sh """#!/bin/bash
 
