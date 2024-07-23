@@ -44,7 +44,7 @@ updateConfJenkins()
      #cat ./kk.txt
      cp ./kk.txt ./scanner_pro/conf/xygeni.yml
      grep url  ./scanner_pro/conf/xygeni.yml
-    exit 1
+
 }
 
 while getopts "d:x:c:p:j:z:" opt
