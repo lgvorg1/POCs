@@ -23,8 +23,7 @@ stages {
           steps {
               script {
                 println "REPO Name [" + "${JOB_BASE_NAME}" + "]" 
-                sh '''
-                    #!/bin/bash
+                sh '''#!/bin/bash
 
                     declare -a repo_list=(
                           "https://github.com/lgvorg1/secrets_local.git"
