@@ -23,7 +23,7 @@ stages {
           steps {
               script {
                 println "REPO Name [" + "${JOB_BASE_NAME}" + "]" 
-                sh '''#!/bin/bash
+                sh """#!/bin/bash
 
                     declare -a repo_list=(
                           "https://github.com/lgvorg1/secrets_local.git"
@@ -34,7 +34,7 @@ stages {
                     $WORKSPACE/scan_repo_list.sh -d $WORKSPACE -x ${env.XY_TOKEN} -c jenkins -p ${env.GITHUB_TOKEN} ${{ secrets.GH_PAT }} -z "${repo_list[*]}"
 
                     exit 1
-                '''
+                """
               }
           }
     }
