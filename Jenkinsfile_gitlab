@@ -5,6 +5,7 @@ environment {
     vGITLAB_TOKEN        = credentials('GITLAB_PAT')
     vJENKINS_TOKEN       = credentials('JENKINS_TOKEN')
     vXY_TOKEN            = credentials('XYGENI_TOKEN_PRO')
+    vJENKINS_MASTER      = env.BUILD_URL.split('/')[2]
   }
 
 
@@ -22,6 +23,7 @@ stages {
                 println "port [" + port + "]"
                 port2 = env.BUILD_URL.split('/')[2]
                 println "port2 [" + port2 + "]"
+                println "vJENKINS_MASTER [" + ${env.vGITLAB_TOKEN} + "]"
                 return
 
                 sh """#!/bin/bash
