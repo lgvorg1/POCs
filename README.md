@@ -17,7 +17,7 @@ Basically, scan_repo_list.sh expects the following parameters
     scan_repo_list.sh -d src_dir -x xygeni_token -c cicd -p cicd_token -z repo_list
         -d <directory path where the scanner will be downloaded> 
         -x <xygeni token>
-        -c <cicd system, valid values : jenkins_github|gitlab|bitbucket|azure_devops|github|circle_ci >
+        -c <cicd system, valid values : github|gitlab|azure_devops|jenkins_github>
         -p <cicd token, i.e. a valid PAT that will be used by Xygeni scanner to connect to the SCM/CICD system and recover security information>
         -z <arraylist of repos to scan>
 ```
@@ -46,11 +46,12 @@ The shell script will donwload the Xygeni scanner and will loop over the provide
 ## Usage into a CI/CD pipeline
 Below you can find examples of how to call the scan_repo_list.sh from different CI/CD pipelines.
 
-[GitHub pipeline](./.github/workflows/xygeni_scan.yml)
+As you can see in below examples, needed tokens are not hardcoded but stored outside of the pipeline and referenced through pipeline variables. Feel free to customize these examples according to your specific needs and your CI/CD environment
 
-[GitLab pipeline](./.gitlab-ci.yml) 
+* [GitHub pipeline](./.github/workflows/xygeni_scan.yml)
+* [GitLab pipeline](./.gitlab-ci.yml) 
+* [Azure DevOps pipeline](./ADO_pipeline.yml) 
+* [Jenkins pipeline](./Jenkinsfile) 
 
-[Azure DevOps pipeline](./ADO_pipeline.yml) 
-
-[Jenkins pipeline](./Jenkinsfile) 
+Because Jenkins is not an SCM, the token that must be provided must be of that SCM where the jenkinsfile checks out the code. That is the reason of the option jenkins_github (i.e. Jenkins using GitHub) as SCM. In this case, if you are using Jenkins with GitHub you must provide the GITHUB_TOKEN in the -p parameter. 
 
