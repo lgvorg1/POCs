@@ -25,33 +25,8 @@ stages:
     - checkout: self
       fetchDepth: 10
     
-    - task: Bash@3
-      displayName: 'Show vars '
-      inputs:
-        targetType: 'inline'
-        script: |
-            ls -l
-            java -version
-            whoami
-            pwd 
-            echo $(vXY_TOKEN)
-            echo $(vAZURE_TOKEN)
-
-
-    - script: |
-        echo $(vAZURE_TOKEN)
-        env
-        env | grep xxAZURE_TOKEN
-      workingDirectory: $(workingDirectory)
-      displayName: 'XXXXX'
-      env:
-        xxAZURE_TOKEN: $(vAZURE_TOKEN)
-
-
     - task: CmdLine@2
       displayName: 'Install and run xygeni scanner'
-      env:
-        xxAZURE_TOKEN: $(vAZURE_TOKEN)
       inputs:
         script: |
             #!/bin/bash
