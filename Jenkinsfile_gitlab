@@ -1,13 +1,13 @@
 pipeline {
   agent { label 'linux' } 
 
-environment {
+//environment {
 
     //vJENKINS_TOKEN       = credentials('JENKINS_TOKEN')
     //vXY_TOKEN            = credentials('XYGENI_TOKEN_PRO')
     //vJENKINS_USER        = "admin"
     
-  }
+//  }
 
 
 stages {
