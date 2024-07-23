@@ -16,6 +16,9 @@ helpFunction()
 
 downloadXYscanner()
 {
+    echo 1: $1
+    echo 2: $2
+    exit 1
     rm -rf ./scanner_pro
     curl -L https://get.xygeni.io/latest/scanner/install.sh | /bin/bash -s -- -t $1 -d $2
 }
