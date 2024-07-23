@@ -5,6 +5,8 @@ environment {
     vGITLAB_TOKEN        = credentials('GITLAB_PAT')
     vJENKINS_TOKEN       = credentials('JENKINS_TOKEN')
     vXY_TOKEN            = credentials('XYGENI_TOKEN_PRO')
+    vJENKINS_USER        = "admin"
+    
   }
 
 
@@ -28,7 +30,7 @@ stages {
                 master_todo = env.BUILD_URL
                 println "master_todo [" + master_todo + "]"
 
-                withEnv(["JENKINS_MASTER=${master}", "JENKINS_PROTO=${prot}"]) {
+                withEnv(["JENKINS_MASTER=${master}", "JENKINS_PROTO=${prot}", "JENKINS_USER=${env.vJENKINS_USER}" ]) {
                 sh """#!/bin/bash
 
                     declare -a repo_list=(

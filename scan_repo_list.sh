@@ -33,12 +33,15 @@ updateConfJenkins()
     #export JENKINS_MASTER=127.0.0.1:8080
     env | grep JENKINS_MASTER
     env | grep JENKINS_PROTO
+    env | grep JENKINS_USER
+    
     echo yyyyyyyyyyyyyyyyyyyyyyyyyy
     grep url  ./scanner_pro/conf/xygeni.yml
     ls -l ./scanner_pro/conf/xygeni.yml
     #cat ./scanner_pro/conf/xygeni.yml | tr '\n' '\r' | sed -e "s/kind: jenkins\r    # Jenkins base URL\r    url: ''/kind: jenkins\r    # Jenkins base URL\r    url: 'http:\/\/$JENKINS_MASTER'"/g  | tr '\r' '\n' > ./scanner_pro/conf/xygeni.yml 
-     cat ./scanner_pro/conf/xygeni.yml | tr '\n' '\r' | sed -e "s/kind: jenkins\r    # Jenkins base URL\r    url: ''/kind: jenkins\r    # Jenkins base URL\r    url: '$JENKINS_PROTO\/\/$JENKINS_MASTER'"/g  | tr '\r' '\n' > ./kk.txt
-     
+    # cat ./scanner_pro/conf/xygeni.yml | tr '\n' '\r' | sed -e "s/kind: jenkins\r    # Jenkins base URL\r    url: ''/kind: jenkins\r    # Jenkins base URL\r    url: '$JENKINS_PROTO\/\/$JENKINS_MASTER'"/g  | tr '\r' '\n' > ./kk.txt
+    cat ./conf/xygeni.yml | tr '\n' '\r' | sed -e "s/kind: jenkins\r    # Jenkins base URL\r    url: ''\r    # Which projects use this CI\/CD system?\r    # Use a regex pattern, like 'project1|project2|project3' or 'prefix_.*'\r    # Leave empty for matching any project for the given jenkins kind\r    usedBy: ''\r    # The username to connect to the CI\/CD API.\r    user: null/kind: jenkins\r    # Jenkins base URL\r    url: '$JENKINS_PROTO\/\/$JENKINS_MASTER'\r    # Which projects use this CI\/CD system?\r    # Use a regex pattern, like 'project1|project2|project3' or 'prefix_.*'\r    # Leave empty for matching any project for the given jenkins kind\r    usedBy: ''\r    # The username to connect to the CI\/CD API.\r    user: $JENKINS_USER"/g   | tr '\r' '\n' > ./kk.txt 
+
      echo XXXXXXXXXXXXXXXXXXXXXXXXXXXXX
      ls -l ./kk.txt
      #cat ./kk.txt
