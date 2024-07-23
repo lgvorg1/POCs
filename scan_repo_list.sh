@@ -30,7 +30,11 @@ executeXYscanner()
 updateConfJenkins()
 {
     #export JENKINS_MASTER=127.0.0.1:8080
-    #cat conf/xygeni.yml | tr '\n' '\r' | sed -e "s/kind: jenkins\r    # Jenkins base URL\r    url: ''/kind: jenkins\r    # Jenkins base URL\r    url: 'http:\/\/$JENKINS_MASTER'"/g  | tr '\r' '\n' > conf/xygeni.yml 
+    env | grep JENKINS_MASTER
+    grep url  ./scanner_pro/conf/xygeni.yml
+    cat ./scanner_pro/conf/xygeni.yml | tr '\n' '\r' | sed -e "s/kind: jenkins\r    # Jenkins base URL\r    url: ''/kind: jenkins\r    # Jenkins base URL\r    url: 'http:\/\/$JENKINS_MASTER'"/g  | tr '\r' '\n' > ./scanner_pro/conf/xygeni.yml 
+    grep url  ./scanner_pro/conf/xygeni.yml
+    exit 1
 }
 
 while getopts "d:x:c:p:j:z:" opt
@@ -60,6 +64,7 @@ case "$parameterC" in
     "jenkins_github" ) export GITHUB_TOKEN="$parameterP" 
                 echo "Parameter is Jenkins GitHub" ;;
     "jenkins_gitlab" ) export GITLAB_TOKEN="$parameterP" 
+                updateConfJenkins
                 echo "Parameter is Jenkins GitLab" ;;
     "gitlab" ) export GITLAB_TOKEN="$parameterP" 
                 echo "Parameter is GitLab" ;; 

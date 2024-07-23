@@ -24,8 +24,6 @@ stages {
                 withEnv(["JENKINS_MASTER=${master}"]) {
                 sh """#!/bin/bash
 
-                    env | grep JENKINS_MASTER
-                    exit 1
                     declare -a repo_list=(
                           "https://gitlab.com/xygroup1/xy-onboarding.git"
                           "https://gitlab.com/xygroup1/gl_cicd_top10_1.git"
