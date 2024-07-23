@@ -30,7 +30,7 @@ stages {
                 master_todo = env.BUILD_URL
                 println "master_todo [" + master_todo + "]"
 
-                withEnv(["JENKINS_MASTER=${master}", "JENKINS_PROTO=${prot}", "JENKINS_USER=${env.vJENKINS_USER}" ]) {
+                withEnv(["JENKINS_MASTER=${master}", "JENKINS_PROTO=${prot}", "JENKINS_USER=${env.vJENKINS_USER}", "JENKINS_TOKEN=${env.vJENKINS_TOKEN}" ]) {
                 sh """#!/bin/bash
 
                     declare -a repo_list=(
