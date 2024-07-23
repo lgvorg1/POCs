@@ -59,6 +59,8 @@ then
    helpFunction
 fi
 
+downloadXYscanner "$parameterX"
+
 # Begin script in case all parameters are correct
 echo src_dir: "$parameterD"
 echo xygeni_token: "$parameterX"
@@ -90,7 +92,7 @@ read -r -a splitArray <<<"$parameterZ"
 
 
 
-downloadXYscanner "$parameterX"
+
 
 
 counter=0
