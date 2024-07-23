@@ -31,7 +31,7 @@ stages {
                           )
 
                     chmod +x $WORKSPACE/scan_repo_list.sh           
-                    $WORKSPACE/scan_repo_list.sh -d $WORKSPACE -x ${env.XY_TOKEN} -c jenkins -p ${env.GITHUB_TOKEN} ${{ secrets.GH_PAT }} -z "${repo_list[*]}"
+                    $WORKSPACE/scan_repo_list.sh -d $WORKSPACE -x ${env.XY_TOKEN} -c jenkins -p ${env.GITHUB_TOKEN} -z "${repo_list[*]}"
 
                     exit 1
                 """
