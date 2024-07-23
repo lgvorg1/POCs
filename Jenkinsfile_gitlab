@@ -3,10 +3,10 @@ pipeline {
 
 environment {
 
-    //vJENKINS_TOKEN       = credentials('JENKINS_TOKEN')
+    vJENKINS_TOKEN       = credentials('JENKINS_TOKEN')
     vXY_TOKEN            = credentials('XYGENI_TOKEN_PRO')
     vGITLAB_TOKEN        = credentials('GITLAB_PAT')
-    //vJENKINS_USER        = "admin"
+    vJENKINS_USER        = "admin"
     
   }
 
@@ -17,10 +17,8 @@ stages {
     stage('Execute Xygeni Scan') {
           steps {
               script {
-                
-                vJENKINS_TOKEN       = credentials('JENKINS_TOKEN')
-                //vXY_TOKEN            = credentials('XYGENI_TOKEN_PRO')
-                vJENKINS_USER        = "admin"
+
+
                 println "REPO Name [" + "${JOB_BASE_NAME}" + "]" 
                 //master = Jenkins.getInstance().getComputer('').getHostName()
                 //println "master [" + master + "]"
@@ -30,10 +28,10 @@ stages {
                 println "master [" + master + "]"
                 prot = env.BUILD_URL.split('/')[0]
                 println "prot [" + prot + "]"
-                master1 = env.BUILD_URL.split('/')[1]
-                println "master1 [" + master1 + "]"
-                master_todo = env.BUILD_URL
-                println "master_todo [" + master_todo + "]"
+                //master1 = env.BUILD_URL.split('/')[1]
+                //println "master1 [" + master1 + "]"
+                //master_todo = env.BUILD_URL
+                //println "master_todo [" + master_todo + "]"
 
                 withEnv(["JENKINS_MASTER=${master}", "JENKINS_PROTO=${prot}", "JENKINS_USER=${vJENKINS_USER}", "JENKINS_TOKEN=${vJENKINS_TOKEN}" ]) {
                 sh """#!/bin/bash
