@@ -81,7 +81,7 @@ case "$parameterC" in
 esac
 
 env | grep _TOKEN
-exit 1
+
 
 read -r -a splitArray <<<"$parameterZ"
 
