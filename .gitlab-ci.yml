@@ -4,7 +4,7 @@ variables:
     vXY_TOKEN: "${XY_TOKEN}"
 
 
-stages:          # List of stages for jobs, and their order of execution 
+stages:          # List of stages for jobs, and their order of execution .
   - BuildStage
   - XygeniScan
   #- test
