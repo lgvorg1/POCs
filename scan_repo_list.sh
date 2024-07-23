@@ -24,7 +24,8 @@ downloadXYscanner()
 executeXYscanner()
 {
     #./scanner_pro/xygeni scan  --include-collaborators --run="inventory,misconf,codetamper,deps,suspectdeps,secrets,compliance,iac" -n $1 --dir $1 -e **/scanner_pro/**
-    ./scanner_pro/xygeni scan  --include-collaborators --run="inventory,misconf,codetamper,deps,suspectdeps,secrets,compliance,iac" -repo=$1 -e **/scanner_pro/**
+    #./scanner_pro/xygeni scan  --include-collaborators --run="inventory,misconf,codetamper,deps,suspectdeps,secrets,compliance,iac" -repo=$1 -e **/scanner_pro/**
+    ./scanner_pro/xygeni scan  --include-collaborators --run="inventory" -repo=$1 -e **/scanner_pro/**
 }
 
 
