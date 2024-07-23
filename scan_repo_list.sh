@@ -18,8 +18,8 @@ downloadXYscanner()
 {
     echo 1: $1
     echo 2: $2
-    exit 1
-    rm -rf ./scanner_pro
+
+    rm -rf $2/scanner_pro
     curl -L https://get.xygeni.io/latest/scanner/install.sh | /bin/bash -s -- -t $1 -d $2
 }
 
@@ -82,7 +82,7 @@ export XY_INST_DIR="$parameterD/scanner_pro"
 echo xygeni_token: "$parameterX"
 export XY_C_TOKEN="$parameterX"
 
-downloadXYscanner "$XY_INST_DIR" "$XY_C_TOKEN"
+downloadXYscanner  "$XY_C_TOKEN" "$XY_INST_DIR"
 
 # Begin script in case all parameters are correct
 
