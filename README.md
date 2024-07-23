@@ -46,7 +46,9 @@ The shell script will donwload the Xygeni scanner and will loop over the provide
 ## Usage into a CI/CD pipeline
 Below you can find examples of how to call the scan_repo_list.sh from different CI/CD pipelines.
 
-As you can see in below examples, needed tokens are not hardcoded but stored outside of the pipeline and referenced through pipeline variables. Feel free to customize these examples according to your specific needs and your CI/CD environment
+As you can see in below examples, needed tokens are not hardcoded but stored outside of the pipeline and referenced through pipeline variables. Feel free to customize these examples according to your specific needs and your CI/CD environment.
+
+You can fork this repo to your SCM/CICD and customize as needed. 
 
 * [GitHub pipeline](./.github/workflows/xygeni_scan.yml)
 * [GitLab pipeline](./.gitlab-ci.yml) 
