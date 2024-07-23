@@ -4,7 +4,7 @@ pipeline {
 //environment {
 
     //vJENKINS_TOKEN       = credentials('JENKINS_TOKEN')
-    //vXY_TOKEN            = credentials('XYGENI_TOKEN_PRO')
+    vXY_TOKEN            = credentials('XYGENI_TOKEN_PRO')
     //vJENKINS_USER        = "admin"
     
 //  }
@@ -18,7 +18,7 @@ stages {
               script {
                 vGITLAB_TOKEN        = credentials('GITLAB_PAT')
                 vJENKINS_TOKEN       = credentials('JENKINS_TOKEN')
-                vXY_TOKEN            = credentials('XYGENI_TOKEN_PRO')
+                //vXY_TOKEN            = credentials('XYGENI_TOKEN_PRO')
                 vJENKINS_USER        = "admin"
                 println "REPO Name [" + "${JOB_BASE_NAME}" + "]" 
                 //master = Jenkins.getInstance().getComputer('').getHostName()
