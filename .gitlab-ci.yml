@@ -38,7 +38,7 @@ Xygeni-job:
                           )
 
       chmod +x ./scan_repo_list.sh           
-      ./scan_repo_list.sh -d . -x $vXY_TOKEN -c github -p $vGITLAB_TOKEN -z "${repo_list[*]}"
+      ./scan_repo_list.sh -d . -x $vXY_TOKEN -c gitlab -p $vGITLAB_TOKEN -z "${repo_list[*]}"
 
   #needs: ["build-job"]
     #- cat ./scanner/conf/misconfigurations/unprotected_branch.yml
