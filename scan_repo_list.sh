@@ -4,8 +4,8 @@
 helpFunction()
 {
    echo ""
-   echo "Usage: $0 -d src_dir -x xygeni_token -c cicd -p cicd_token -z repo_list"
-   echo -e "\t-d src_dir"
+   echo "Usage: $0 -d scanner_dir -x xygeni_token -c cicd -p cicd_token -z repo_list"
+   echo -e "\t-d scanner_dir"
    echo -e "\t-x xygeni_token"
    echo -e "\t-c cicd system"
    echo -e "\t-p cicd token"
@@ -16,16 +16,15 @@ helpFunction()
 
 downloadXYscanner()
 {
-    echo $1
     rm -rf ./scanner_pro
-    curl -L https://get.xygeni.io/latest/scanner/install.sh | /bin/bash -s -- -t $1 -d ./scanner_pro
+    curl -L https://get.xygeni.io/latest/scanner/install.sh | /bin/bash -s -- -t $1 -d $2
 }
 
 executeXYscanner()
 {
     #./scanner_pro/xygeni scan  --include-collaborators --run="inventory,misconf,codetamper,deps,suspectdeps,secrets,compliance,iac" -n $1 --dir $1 -e **/scanner_pro/**
     #./scanner_pro/xygeni scan  --include-collaborators --run="inventory,misconf,codetamper,deps,suspectdeps,secrets,compliance,iac" -repo=$1 -e **/scanner_pro/**
-    ./scanner_pro/xygeni scan  --no-conf-download --include-collaborators --run="inventory" -repo=$1 -e **/scanner_pro/**
+    $2/xygeni scan  --no-conf-download --include-collaborators --run="inventory" -repo=$1 -e **/$2/**
 }
 
 
@@ -38,21 +37,22 @@ updateConfJenkins()
     env | grep JENKINS_TOKEN
     
     echo yyyyyyyyyyyyyyyyyyyyyyyyyy
-    grep url  ./scanner_pro/conf/xygeni.yml
-    ls -l ./scanner_pro/conf/xygeni.yml
-    rm -rf ./kk.txt
+    grep url  $1/conf/xygeni.yml
+    ls -l $1/conf/xygeni.yml
+    rm -rf $1/kk.txt
     #cat ./scanner_pro/conf/xygeni.yml | tr '\n' '\r' | sed -e "s/kind: jenkins\r    # Jenkins base URL\r    url: ''/kind: jenkins\r    # Jenkins base URL\r    url: 'http:\/\/$JENKINS_MASTER'"/g  | tr '\r' '\n' > ./scanner_pro/conf/xygeni.yml 
     # cat ./scanner_pro/conf/xygeni.yml | tr '\n' '\r' | sed -e "s/kind: jenkins\r    # Jenkins base URL\r    url: ''/kind: jenkins\r    # Jenkins base URL\r    url: '$JENKINS_PROTO\/\/$JENKINS_MASTER'"/g  | tr '\r' '\n' > ./kk.txt
-    cat ./scanner_pro/conf/xygeni.yml | tr '\n' '\r' | sed -e "s/kind: jenkins\r    # Jenkins base URL\r    url: ''\r    # Which projects use this CI\/CD system?\r    # Use a regex pattern, like 'project1|project2|project3' or 'prefix_.*'\r    # Leave empty for matching any project for the given jenkins kind\r    usedBy: ''\r    # The username to connect to the CI\/CD API.\r    user: null/kind: jenkins\r    # Jenkins base URL\r    url: '$JENKINS_PROTO\/\/$JENKINS_MASTER'\r    # Which projects use this CI\/CD system?\r    # Use a regex pattern, like 'project1|project2|project3' or 'prefix_.*'\r    # Leave empty for matching any project for the given jenkins kind\r    usedBy: ''\r    # The username to connect to the CI\/CD API.\r    user: $JENKINS_USER"/g   | tr '\r' '\n' > ./kk.txt 
+    cat $1/conf/xygeni.yml | tr '\n' '\r' | sed -e "s/kind: jenkins\r    # Jenkins base URL\r    url: ''\r    # Which projects use this CI\/CD system?\r    # Use a regex pattern, like 'project1|project2|project3' or 'prefix_.*'\r    # Leave empty for matching any project for the given jenkins kind\r    usedBy: ''\r    # The username to connect to the CI\/CD API.\r    user: null/kind: jenkins\r    # Jenkins base URL\r    url: '$JENKINS_PROTO\/\/$JENKINS_MASTER'\r    # Which projects use this CI\/CD system?\r    # Use a regex pattern, like 'project1|project2|project3' or 'prefix_.*'\r    # Leave empty for matching any project for the given jenkins kind\r    usedBy: ''\r    # The username to connect to the CI\/CD API.\r    user: $JENKINS_USER"/g   | tr '\r' '\n' > $1/kk.txt 
 
      echo XXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-     ls -l ./kk.txt
+     ls -l $1/kk.txt
      #cat ./kk.txt
-     cp ./kk.txt ./scanner_pro/conf/xygeni.yml
-     grep url  ./scanner_pro/conf/xygeni.yml
-     diff ./kk.txt ./scanner_pro/conf/xygeni.yml
+     cp $1/kk.txt $1/conf/xygeni.yml
+     grep url  $1/conf/xygeni.yml
+     diff $1/kk.txt $1/scanner_pro/conf/xygeni.yml
 
 }
+
 
 while getopts "d:x:c:p:j:z:" opt
 do
@@ -73,17 +73,22 @@ then
    helpFunction
 fi
 
-downloadXYscanner "$parameterX"
+
+echo src_dir: "$parameterD"
+export XY_INST_DIR="$parameterD"
+echo xygeni_token: "$parameterX"
+export XY_C_TOKEN="$parameterX"
+
+downloadXYscanner "$XY_INST_DIR" "$XY_C_TOKEN"
 
 # Begin script in case all parameters are correct
-echo src_dir: "$parameterD"
-echo xygeni_token: "$parameterX"
+
 echo cicd system: "$parameterC"
 case "$parameterC" in 
     "jenkins_github" ) export GITHUB_TOKEN="$parameterP" 
                 echo "Parameter is Jenkins GitHub" ;;
     "jenkins_gitlab" ) export GITLAB_TOKEN="$parameterP" 
-                updateConfJenkins
+                updateConfJenkins "$XY_INST_DIR"
                 echo "Parameter is Jenkins GitLab" ;;
     "gitlab" ) export GITLAB_TOKEN="$parameterP" 
                 echo "Parameter is GitLab" ;; 
@@ -112,7 +117,7 @@ read -r -a splitArray <<<"$parameterZ"
 counter=0
 for a in "${splitArray[@]}"; do
     #echo "$a"
-    executeXYscanner "$a"
+    executeXYscanner "$a" "$XY_INST_DIR"
     ((counter++))
     #git clone "$a" dir$counter
     #pwd
