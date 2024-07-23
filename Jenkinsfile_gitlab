@@ -20,6 +20,8 @@ stages {
                 println "master [" + master + "]"
                 port = env.BUILD_URL.split('/')[2].split(':')[0]
                 println "port [" + port + "]"
+                port2 = env.BUILD_URL.split('/')[2]
+                println "port2 [" + port2 + "]"
                 return
 
                 sh """#!/bin/bash
