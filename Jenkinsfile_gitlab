@@ -15,6 +15,7 @@ stages {
     stage('Execute Xygeni Scan') {
       //agent { label 'linux' } 
           steps {
+             
               script {
                 println "REPO Name [" + "${JOB_BASE_NAME}" + "]" 
                 master = Jenkins.getInstance().getComputer('').getHostName()
@@ -23,11 +24,12 @@ stages {
                 println "port [" + port + "]"
                 port2 = env.BUILD_URL.split('/')[2]
                 println "port2 [" + port2 + "]"
-                println "vJENKINS_MASTER [" + ${env.vGITLAB_TOKEN} + "]"
-                return
-
+                
+                withEnv(["KK=${port2}"]) {
                 sh """#!/bin/bash
 
+                    env | grep KK
+                    exit 1
                     declare -a repo_list=(
                           "https://gitlab.com/xygroup1/xy-onboarding.git"
                           "https://gitlab.com/xygroup1/gl_cicd_top10_1.git"
@@ -38,6 +40,7 @@ stages {
 
                 """
               }
+            }
           }
     }
   
