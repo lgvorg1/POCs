@@ -21,15 +21,14 @@ stages {
                 //println "port [" + port + "]"
                 master = env.BUILD_URL.split('/')[2]
                 println "master [" + master + "]"
-                master0 = env.BUILD_URL.split('/')[0]
-                master = master0 + "//" + master
-                println "master0 [" + master0 + "]"
+                prot = env.BUILD_URL.split('/')[0]
+                println "prot [" + prot + "]"
                 master1 = env.BUILD_URL.split('/')[1]
                 println "master1 [" + master1 + "]"
                 master_todo = env.BUILD_URL
                 println "master_todo [" + master_todo + "]"
 
-                withEnv(["JENKINS_MASTER=${master}"]) {
+                withEnv(["JENKINS_MASTER=${master}", "JENKINS_PROTO=${prot}"]) {
                 sh """#!/bin/bash
 
                     declare -a repo_list=(

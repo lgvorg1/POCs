@@ -32,11 +32,12 @@ updateConfJenkins()
 {
     #export JENKINS_MASTER=127.0.0.1:8080
     env | grep JENKINS_MASTER
+    env | grep JENKINS_PROTO
     echo yyyyyyyyyyyyyyyyyyyyyyyyyy
     grep url  ./scanner_pro/conf/xygeni.yml
     ls -l ./scanner_pro/conf/xygeni.yml
     #cat ./scanner_pro/conf/xygeni.yml | tr '\n' '\r' | sed -e "s/kind: jenkins\r    # Jenkins base URL\r    url: ''/kind: jenkins\r    # Jenkins base URL\r    url: 'http:\/\/$JENKINS_MASTER'"/g  | tr '\r' '\n' > ./scanner_pro/conf/xygeni.yml 
-     cat ./scanner_pro/conf/xygeni.yml | tr '\n' '\r' | sed -e "s/kind: jenkins\r    # Jenkins base URL\r    url: ''/kind: jenkins\r    # Jenkins base URL\r    url: 'http:\/\/$JENKINS_MASTER'"/g  | tr '\r' '\n' > ./kk.txt
+     cat ./scanner_pro/conf/xygeni.yml | tr '\n' '\r' | sed -e "s/kind: jenkins\r    # Jenkins base URL\r    url: ''/kind: jenkins\r    # Jenkins base URL\r    url: '$JENKINS_PROTO:\/\/$JENKINS_MASTER'"/g  | tr '\r' '\n' > ./kk.txt
      
      echo XXXXXXXXXXXXXXXXXXXXXXXXXXXXX
      ls -l ./kk.txt
