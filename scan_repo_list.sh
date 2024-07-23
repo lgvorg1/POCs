@@ -75,7 +75,7 @@ fi
 
 
 echo src_dir: "$parameterD"
-export XY_INST_DIR="$parameterD"
+export XY_INST_DIR="$parameterD/scanner_pro"
 echo xygeni_token: "$parameterX"
 export XY_C_TOKEN="$parameterX"
 
