@@ -5,6 +5,7 @@ environment {
 
     //vJENKINS_TOKEN       = credentials('JENKINS_TOKEN')
     vXY_TOKEN            = credentials('XYGENI_TOKEN_PRO')
+    vGITLAB_TOKEN        = credentials('GITLAB_PAT')
     //vJENKINS_USER        = "admin"
     
   }
@@ -16,7 +17,7 @@ stages {
     stage('Execute Xygeni Scan') {
           steps {
               script {
-                vGITLAB_TOKEN        = credentials('GITLAB_PAT')
+                
                 vJENKINS_TOKEN       = credentials('JENKINS_TOKEN')
                 //vXY_TOKEN            = credentials('XYGENI_TOKEN_PRO')
                 vJENKINS_USER        = "admin"
@@ -43,7 +44,7 @@ stages {
                           )
 
                     chmod +x $WORKSPACE/scan_repo_list.sh           
-                    $WORKSPACE/scan_repo_list.sh -d $WORKSPACE -x ${env.vXY_TOKEN} -c jenkins_gitlab -p ${vGITLAB_TOKEN} -z "\${repo_list[*]}"
+                    $WORKSPACE/scan_repo_list.sh -d $WORKSPACE -x ${env.vXY_TOKEN} -c jenkins_gitlab -p ${env.vGITLAB_TOKEN} -z "\${repo_list[*]}"
 
                 """
               }
