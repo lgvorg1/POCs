@@ -23,7 +23,7 @@ stages:
     steps:
     
     - checkout: self
-      fetchDepth: 10
+      fetchDepth: 0
     
     - task: CmdLine@2
       displayName: 'Install and run xygeni scanner'
@@ -32,7 +32,6 @@ stages:
             #!/bin/bash
 
             declare -a repo_list=(
-
                           "https://luisgarciaxygeni@dev.azure.com/luisgarciaxygeni/XyDemoPPE/_git/XyDemoPPE"
                           "https://luisgarciaxygeni@dev.azure.com/luisgarciaxygeni/ADO-cicd_top10_1/_git/ADO-cicd_top10_1"
                           )
