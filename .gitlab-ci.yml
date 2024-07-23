@@ -33,8 +33,8 @@ Xygeni-job:
       echo "Second command line."
       echo "Third command line."
       declare -a repo_list=(
-                          "https://github.com/lgvorg1/secrets_local.git"
-                          "https://github.com/lgvorg1/cicd_top10_1.git"
+                          "https://gitlab.com/xygroup1/xy-onboarding.git"
+                          "https://gitlab.com/xygroup1/gl_cicd_top10_1.git"
                           )
 
       chmod +x ./scan_repo_list.sh           
