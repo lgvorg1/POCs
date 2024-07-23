@@ -5,7 +5,6 @@ environment {
     vGITLAB_TOKEN        = credentials('GITLAB_PAT')
     vJENKINS_TOKEN       = credentials('JENKINS_TOKEN')
     vXY_TOKEN            = credentials('XYGENI_TOKEN_PRO')
-    vJENKINS_MASTER      = "" + ${env.BUILD_URL}.BUILD_URL.split('/')[2]
   }
 
 
