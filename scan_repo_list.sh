@@ -40,7 +40,10 @@ updateConfJenkins()
      
      echo XXXXXXXXXXXXXXXXXXXXXXXXXXXXX
      ls -l ./kk.txt
-     cat ./kk.txt
+     #cat ./kk.txt
+     cp ./kk.txt ./scanner_pro/conf/xygeni.yml
+     grep url  ./scanner_pro/conf/xygeni.yml
+
      exit 1
     grep url  ./scanner_pro/conf/xygeni.yml
     cat ./scanner_pro/conf/xygeni.yml
